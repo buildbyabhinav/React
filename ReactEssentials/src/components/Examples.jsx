@@ -14,8 +14,8 @@ const Examples = () => {
   return (
     <Section id="examples" title="Examples">
       <Tabs
-      buttonsContainer = 'div' // is we want built in component to be used then passed as string for custom component {} are used like {Section}
-        buttons={
+      buttonsContainer = 'menu' // is we want built in component to be used then passed as string for custom component {} are used like {Section}
+        buttons={ 
           <>
             <TabButton
               isSelected={selectedTopic === "components"}
