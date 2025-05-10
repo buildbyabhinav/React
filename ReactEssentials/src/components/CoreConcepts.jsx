@@ -1,11 +1,11 @@
 import React from "react";
 import CoreConcept from "./CoreConcept";
 import { CORE_CONCEPTS } from "../data";
+import Section from "./Section";
 
 const CoreConcepts = () => {
   return (
-    <section id="core-concepts">
-      <h2>Core Concepts</h2>
+    <Section id="core-concepts" title='Core Concepts'>
       <ul>
         {CORE_CONCEPTS.map((concept) => (
           <CoreConcept {...concept} key={concept.title} />
@@ -19,7 +19,7 @@ const CoreConcepts = () => {
             <CoreConcept {...CORE_CONCEPTS[2]} />
             <CoreConcept {...CORE_CONCEPTS[3]} /> */}
       </ul>
-    </section>
+    </Section>
   );
 };
 
