@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 
-const UserInput = () => {
-  const [userInput, setUserInput] = useState({
-    initialInvestment: 10000,
-    annualInvestment: 1200,
-    expectedReturn: 6,
-    duration: 10,
-  });
+const UserInput = ({userInput, handleInputChange}) => {
+//   const [userInput, setUserInput] = useState({
+//     initialInvestment: 10000,
+//     annualInvestment: 1200,
+//     expectedReturn: 6,
+//     duration: 10,
+//   });
 
-  function handleInputChange(eventIdentifier, newValue) {
-    setUserInput((previousInput) => {
-      return { ...previousInput, [eventIdentifier]: newValue };
-    });
-  }
+//   function handleInputChange(eventIdentifier, newValue) {
+//     setUserInput((previousInput) => {
+//       return { ...previousInput, [eventIdentifier]: newValue };
+//     });
+//   }
 
   return (
     <section id="user-input">
