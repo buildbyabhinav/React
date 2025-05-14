@@ -13,7 +13,7 @@ function App() {
 
   function handleInputChange(eventIdentifier, newValue) {
     setUserInput((previousInput) => {
-      return { ...previousInput, [eventIdentifier]: newValue };
+      return { ...previousInput, [eventIdentifier]: +newValue }; // addignplus forces conversion of string to number
     });
   }
 
@@ -21,7 +21,7 @@ function App() {
     <>
       <Header />
       <UserInput userInput={userInput} handleInputChange={handleInputChange} />
-      <Results/>
+      <Results input={userInput}/>
     </>
   );
 }

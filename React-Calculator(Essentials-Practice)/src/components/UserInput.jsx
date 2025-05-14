@@ -24,7 +24,7 @@ const UserInput = ({userInput, handleInputChange}) => {
             required
             value={userInput.initialInvestment}
             onChange={(event) =>
-              handleInputChange("initialInvestment", event.target.value)
+              handleInputChange("initialInvestment", event.target.value) // event.target.value gives string not number therefore when perfoemed mathematical calculation it behaves as string and conactenates values instead of performing maths
             }
           />
         </p>
