@@ -11,6 +11,8 @@ function App() {
     duration: 10,
   });
 
+  const inputIsValid = userInput.duration >= 1;
+
   function handleInputChange(eventIdentifier, newValue) {
     setUserInput((previousInput) => {
       return { ...previousInput, [eventIdentifier]: +newValue }; // addignplus forces conversion of string to number
@@ -21,7 +23,8 @@ function App() {
     <>
       <Header />
       <UserInput userInput={userInput} handleInputChange={handleInputChange} />
-      <Results input={userInput}/>
+      {!inputIsValid && <p className="center">Please enter a duration greater than or equal to 1</p>}
+      { inputIsValid && <Results input={userInput}/>}
     </>
   );
 }
