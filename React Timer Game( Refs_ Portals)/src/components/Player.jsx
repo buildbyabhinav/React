@@ -13,12 +13,13 @@ export default function Player() {
   function handleClick() {
     // setSubmitted(true)
     setEnteredPlayerName(playerNameRef.current.value);
+    playerNameRef.current.value = ''; //this is writing imperative code i.e. directly manipulating the dom which is not good every time
   }
   return (
     <section id="player">
       {/* <h2>Welcome {submitted ? enteredPlayerName: 'unknown entity'}</h2> */}
       <h2>
-        Welcome {enteredPlayerName ? enteredPlayerName : "unknown entity"}
+        Welcome {enteredPlayerName? enteredPlayerName: "unknown entity"}
       </h2>
 
       <p>

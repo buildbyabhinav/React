@@ -1,0 +1,34 @@
+import { useImperativeHandle, useRef } from "react";
+
+const ResultModal = ({ targetTime, ref, remainingTime , onReset}) => {
+  const dialogRef = useRef();
+  const userLost = remainingTime <= 0;
+  const formattedRemainingTime = (remainingTime/1000).toFixed(2)
+  useImperativeHandle(ref, () => {
+    return {
+      open() {
+        dialogRef.current.showModal()
+      },
+    };
+  });
+  return (
+    <dialog className="result-modal" 
+    // ref={ref}
+    ref={dialogRef}
+    >
+      {userLost &&<h2>{result}</h2>}
+      <p>
+        The target time was <strong>{targetTime}</strong> seconds.
+      </p>
+      <p>
+        You stopped the timer with <strong> {formattedRemainingTime}seconds left</strong>
+      </p>
+      <form method="dialog" onSubmit={onReset}>
+        <button>Close</button>
+      </form>
+    </dialog>
+  );
+};
+
+export default ResultModal;
+// earlier forwardRef was used to forward ref as a prop
