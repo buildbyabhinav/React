@@ -4,79 +4,81 @@ import Header from "./components/Header.jsx";
 import Shop from "./components/Shop.jsx";
 import { DUMMY_PRODUCTS } from "./dummy-products.js";
 import Product from "./components/Product.jsx";
-import { CartContext } from "./store/cart-context.js";
+import CartContextProvider from "./store/cart-context.js";
 
 function App() {
-  const [shoppingCart, setShoppingCart] = useState({
-    items: [],
-  });
+  // const [shoppingCart, setShoppingCart] = useState({
+  //   items: [],
+  // });
 
-  function handleAddItemToCart(id) {
-    setShoppingCart((prevShoppingCart) => {
-      const updatedItems = [...prevShoppingCart.items];
+  // function handleAddItemToCart(id) {
+  //   setShoppingCart((prevShoppingCart) => {
+  //     const updatedItems = [...prevShoppingCart.items];
 
-      const existingCartItemIndex = updatedItems.findIndex(
-        (cartItem) => cartItem.id === id
-      );
-      const existingCartItem = updatedItems[existingCartItemIndex];
+  //     const existingCartItemIndex = updatedItems.findIndex(
+  //       (cartItem) => cartItem.id === id
+  //     );
+  //     const existingCartItem = updatedItems[existingCartItemIndex];
 
-      if (existingCartItem) {
-        const updatedItem = {
-          ...existingCartItem,
-          quantity: existingCartItem.quantity + 1,
-        };
-        updatedItems[existingCartItemIndex] = updatedItem;
-      } else {
-        const product = DUMMY_PRODUCTS.find((product) => product.id === id);
-        updatedItems.push({
-          id: id,
-          name: product.title,
-          price: product.price,
-          quantity: 1,
-        });
-      }
+  //     if (existingCartItem) {
+  //       const updatedItem = {
+  //         ...existingCartItem,
+  //         quantity: existingCartItem.quantity + 1,
+  //       };
+  //       updatedItems[existingCartItemIndex] = updatedItem;
+  //     } else {
+  //       const product = DUMMY_PRODUCTS.find((product) => product.id === id);
+  //       updatedItems.push({
+  //         id: id,
+  //         name: product.title,
+  //         price: product.price,
+  //         quantity: 1,
+  //       });
+  //     }
 
-      return {
-        items: updatedItems,
-      };
-    });
-  }
+  //     return {
+  //       items: updatedItems,
+  //     };
+  //   });
+  // }
 
-  function handleUpdateCartItemQuantity(productId, amount) {
-    setShoppingCart((prevShoppingCart) => {
-      const updatedItems = [...prevShoppingCart.items];
-      const updatedItemIndex = updatedItems.findIndex(
-        (item) => item.id === productId
-      );
+  // function handleUpdateCartItemQuantity(productId, amount) {
+  //   setShoppingCart((prevShoppingCart) => {
+  //     const updatedItems = [...prevShoppingCart.items];
+  //     const updatedItemIndex = updatedItems.findIndex(
+  //       (item) => item.id === productId
+  //     );
 
-      const updatedItem = {
-        ...updatedItems[updatedItemIndex],
-      };
+  //     const updatedItem = {
+  //       ...updatedItems[updatedItemIndex],
+  //     };
 
-      updatedItem.quantity += amount;
+  //     updatedItem.quantity += amount;
 
-      if (updatedItem.quantity <= 0) {
-        updatedItems.splice(updatedItemIndex, 1);
-      } else {
-        updatedItems[updatedItemIndex] = updatedItem;
-      }
+  //     if (updatedItem.quantity <= 0) {
+  //       updatedItems.splice(updatedItemIndex, 1);
+  //     } else {
+  //       updatedItems[updatedItemIndex] = updatedItem;
+  //     }
 
-      return {
-        items: updatedItems,
-      };
-    });
-  }
+  //     return {
+  //       items: updatedItems,
+  //     };
+  //   });
+  // }
 
-  const ctxValue = {
-    items : shoppingCart,
-    addItemToCart : handleAddItemToCart
-  }
+  // const ctxValue = {
+  //   items : shoppingCart,
+  //   addItemToCart : handleAddItemToCart,
+  //   updateItemsInCart : handleUpdateCartItemQuantity
+  // }
 
   return (
-    <CartContext.Provider value={ctxValue}>
+    <CartContextProvider>
+    {/* <CartContext.Provider value={ctxValue}> */}
       <Header
-        cart={shoppingCart}
-        onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
+        // cart={shoppingCart}
+        // onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
       />
       <Shop
       //  onAddItemToCart={handleAddItemToCart}
@@ -89,7 +91,8 @@ function App() {
           </li>
         ))}
       </Shop>
-    </CartContext.Provider>
+    {/* </CartContext.Provider> */}
+    </CartContextProvider>
   );
 }
 
