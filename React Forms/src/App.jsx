@@ -1,7 +1,8 @@
 import Header from './components/Header.jsx';
-import StateLogin from './components/StateLogin.jsx';
+// import RefLogin from './components/RefLogin.jsx';
+// import StateLogin from './components/StateLogin.jsx';
 // import Login from './components/Login.jsx';
-// import Signup from './components/Signup.jsx';
+import Signup from './components/Signup.jsx';
 
 function App() {
   return (
@@ -9,8 +10,9 @@ function App() {
       <Header />
       <main>
         {/* <Login /> */}
-        {/* <Signup/> */}
-        <StateLogin/>
+        <Signup/>
+        {/* <StateLogin/> */}
+        {/* <RefLogin/> */}
       </main>
     </>
   );
