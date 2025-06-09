@@ -1,11 +1,11 @@
 // import { createStore } from "redux";
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-const initialState = { counter: 0, showCounter: false };
+const initialCounterState = { counter: 0, showCounter: false };
 
 const counterSlice = createSlice({
   name: "counter",
-  initialState: initialState,
+  initialState: initialCounterState,
   reducers: {
     increment(state) {
       state.counter++; // this is fine here because behnd the scenes redux toolkit has a package that provides us with a clone of the previous state not the state itself
@@ -21,6 +21,23 @@ const counterSlice = createSlice({
     },
   },
 });
+
+const initialAuthState = {
+  isAuthenticated : false
+}
+
+const authSlice = createSlice({
+  name:'auth',
+  initialState: initialAuthState,
+  reducers : {
+    login (state){
+      state.isAuthenticated = true
+    },
+    logout(state){
+      state.isAuthenticated = false
+    }
+  }
+})
 
 // const counterReducer = (state = initialState, action) => {
 //   if (action.type === "increment") {
@@ -60,10 +77,12 @@ const counterSlice = createSlice({
 
  const store = configureStore({
   reducer: {
-    counter : counterSlice.reducer
+    counter : counterSlice.reducer,
+    auth : authSlice.reducer
   }
  });
 
  export const counterActions = counterSlice.actions
+ export const authActions = authSlice.actions
 
 export default store;
