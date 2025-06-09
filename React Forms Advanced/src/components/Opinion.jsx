@@ -1,4 +1,33 @@
+import { use, useActionStatus, useOptimistic } from "react";
+import { OpinionsContext } from "../store/opinions-context";
+
 export function Opinion({ opinion: { id, title, body, userName, votes } }) {
+  const { upvoteOpinion, downvoteOpinion } = use(OpinionsContext);
+
+  const [optimisticVotes, setVotesOptimistically] = useOptimistic(
+    votes,
+    (prevVotes, mode) => (mode === "up" ? prevVotes + 1 : prevVotes - 1)
+  );
+  //this optimistic thing is used in conjunction with the form action only as it is performed only when form is being submitted
+  // any number of arguements passed to this function after prevState arguement will be passed to setOptimistically function thrown out by useOptimisitic hook
+  async function upvoteAction() {
+    setVotesOptimistically('up') // this up is treated as mode as prev state is already captured by react
+    await upvoteOpinion(id);
+  }
+
+  async function downvoteAction() {
+    setVotesOptimistically('down')
+    await downvoteOpinion(id);
+  }
+
+  const [upvoteFormState, upvoteFormAction, upvotePending] = useActionStatus(
+    upvoteAction,
+    null
+  );
+
+  const [downvoteFormState, downvoteFormAction, downvotePending] =
+    useActionStatus(downvoteAction, null);
+
   return (
     <article>
       <header>
@@ -7,7 +36,10 @@ export function Opinion({ opinion: { id, title, body, userName, votes } }) {
       </header>
       <p>{body}</p>
       <form className="votes">
-        <button>
+        <button
+          formAction={upvoteFormAction}
+          disabled={upvotePending || downvotePending}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -25,9 +57,12 @@ export function Opinion({ opinion: { id, title, body, userName, votes } }) {
           </svg>
         </button>
 
-        <span>{votes}</span>
+        <span>{optimisticVotes}</span>
 
-        <button>
+        <button
+          formAction={downvoteFormAction}
+          disabled={upvotePending || downvotePending}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
